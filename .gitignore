@@ -1,23 +1,15 @@
-# Compiled class file
-*.class
+<!DOCTYPE html>
+  <html>
+  <head>
+    <script>
+      function OpenWindow(url) {
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+var myWindow = window.open(url, "New Window", "width=200, height=100");
+myWindow.document.write("<p> This is a new window. </p>");
+}
+    </script>
+  <body>
+  <div id="mydiv">My First JavaScript code.</div>
+  <button type="button" onclick="OpenWindow('contact.html')">Contact me!</button>
+  </body>
+  </html>
