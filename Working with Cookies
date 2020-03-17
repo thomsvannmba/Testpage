@@ -1,0 +1,42 @@
+Working with Cookies
+
+Have you ever seen forms where the web page automatically knows your username or some property that you've entered into the website's stored data? Values stored that persist through leaving the site or closing the browser use cookies. Cookies are small files stored in the browser's cookie directory. These files are generally harmless and help a website identify you and basic information when you open the website. One issue to note is that you never store sensitive information in a cookie. For instance, you wouldn't store a user's password in a cookie. Cookie files are stored in plain text, so anyone who has access to the user's cookies would be able to read this sensitive information. Don't store passwords, credit card information or social security numbers in cookies. 
+
+The cookie property is stored in the document object. You must give the cookie a name and a value. The name is used to call the cookie when the user returns, and the value is what you want to display or process when the user returns. 
+
+Take a look at the following JavaScript code (the HTML is excluded in this example). 
+
+document.cookie = "username=jdoe"; 
+
+The above code assigns a new cookie to the browser. The cookie name is "username" and the value assigned is "jdoe." When the user returns to the page, you can use this cookie to automatically display the user's name. 
+
+When you create a cookie, you should also give it an expiration date. The expiration date tells the browser when it can delete the cookie. For instance, you might want to force a user to enter his username and password in 30 days for security reasons. You could then set a cookie's expiration date to 30 days from the current date. The following code shows you how to set an expiration date for your new username cookie. 
+
+var now = new Date();
+
+now.setDate(now.getDate() + 30);
+
+document.cookie = "username=jdoe; expires=" + now.toString(); 
+
+You'll recognize the Date object from a previous lesson. This code gets the current date, adds 30 days to the date, and then it assigns this value to the cookie's "expires" property.  Now, when the user closes his browser after 30 days, the browser will automatically delete the cookie. Remember that the Date object gets the date on the user's computer because JavaScript is client-side code.
+If the date on the user's computer is wrong, your code will add 30 days to the user's clock settings and not your local server's time.
+Working with localized time is done on the server-side code that you can pass to the browser. 
+Incidentally, you can force a cookie to delete immediately after the user closes the browser. 
+If you set the cookie's expiration date to a passed date, the cookie is automatically expired and the browser removes it as soon as the user is done with your web application. 
+
+You've set your cookie, but how do you get the cookie and its value? What if you have multiple cookies? Each cookie is separated by a semicolon.
+You can use a "for" loop to go through each cookie object and find the one you want to use. The following code gives you an example. 
+
+    var cookies = document.cookie.split(';');
+
+    for(var i=0; i< cookies.length; i++) {
+
+        var c = cookies [i];
+
+        if (c.indexOf("username") != -1)
+
+        document.getElementById("cookiediv").innerHTML = c. substring(("username").length,c.length);
+
+    }
+ The above code is a bit complex. There is no way to read a cookie by name like most languages. The above code splits the cookie array by semicolon and loops through each value until it finds the cookie name "username." 
+ Then, it identifies the cookie's value by getting the substring from the array string. You might need to tweak this code to match your own requirements, but the takeaway is that you need to loop through JavaScript cookies to find the one you want to read. 
